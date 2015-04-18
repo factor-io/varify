@@ -7,3 +7,6 @@ rvm:
 - 2.2.0
 - 2.2.1
 - 2.2.2
+env:
+  global:
+    secure: OSmDrI+squ9ahShHelGS/EFGGLFbdNsKwHDGicZ4+pf0aCuX/Dlq1PxyQLFL7LECxJwIq5u78XU+vuRWMd6ZRsfgT2R13rSBO68WCU6qLQJkG7xwFliU3ZIX3l3vfkhFCNNB5uixy+RNCAVvbs/76aXh3jgvdwtfhix6jyxBejs=
