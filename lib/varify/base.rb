@@ -7,10 +7,17 @@ module Varify
       required: Varify::Rules::RequiredRule
     }
 
+
+    # Sets the callback for when a validation fails
+    # @param &block [Proc] the callback to run when validation fails
+    # @yieldparam
     def self.callback(&block)
       @callback = block
     end
 
+    # Used by the varify method to send error messages to the callback
+    # @param options [Hash] has including a :key, :rule, and :message
+    # @api private
     def self.fail(options={})
       message = options.is_a?(String) ? options : options[:message]
       raise "Fail (fail) requires a string message or hash with :message" unless message
@@ -26,6 +33,9 @@ module Varify
       @callback.call(error) if @callback
     end
 
+    # Processes the input parameter
+    # @param param_key [Symbol] the key to identify the value out of the hash
+    # @param params [Hash] the hash of keys 
     def self.varify(param_key, params={}, options={},&block)
       value = params[param_key] || options[:default]
       name  = params[:name] || param_key.to_s.split('_').map{|e| e.capitalize}.join(' ')
