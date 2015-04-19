@@ -11,7 +11,7 @@ module Varify
         end
       end
 
-      def error_message(value)
+      def error_message
         "#{@name} (:#{@key}) is required"
       end
     end

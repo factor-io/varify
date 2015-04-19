@@ -63,7 +63,7 @@ module Varify
       end
 
       rules.each do |rule_key,rule|
-        fail(message: rule.error_message(value), key: param_key, rule:rule_key) unless rule.valid?
+        fail(message: rule.error_message, key: param_key, rule:rule_key) unless rule.valid?
       end
 
       value

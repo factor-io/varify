@@ -14,7 +14,7 @@ module Varify
         raise NotImplementedError
       end
 
-      def error_message(value)
+      def error_message
         "#{@name} (:#{@key}) failed verification"
       end
     end

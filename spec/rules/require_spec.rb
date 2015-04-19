@@ -16,4 +16,9 @@ describe Varify::Rules::RequiredRule do
     v = Varify::Rules::RequiredRule.new(:key,'Key',nil,true)
     expect(v.valid?).to eq(false)
   end
+
+  it 'can set error message' do
+    v = Varify::Rules::RequiredRule.new(:key,'Key','foo',Hash)
+    expect(v.error_message).to eq('Key (:key) is required')
+  end
 end
