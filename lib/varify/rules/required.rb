@@ -4,7 +4,11 @@ module Varify
   module Rules
     class RequiredRule < Rule
       def valid?
-        !@value.nil?
+        if @options
+          !@value.nil? 
+        else
+          true
+        end
       end
 
       def error_message(value)
