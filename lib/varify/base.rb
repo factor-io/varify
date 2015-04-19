@@ -16,7 +16,10 @@ module Varify
     end
 
     # Used by the varify method to send error messages to the callback
-    # @param options [Hash] has including a :key, :rule, and :message
+    # @param [Hash] options the information to post for the error
+    # @option options [String] :message the user readable message
+    # @option options [Symbol] :key the key of the value to get from the Hashh
+    # @option options [Symbol] :rule the Rule ID from RULES
     # @api private
     def self.fail(options={})
       message = options.is_a?(String) ? options : options[:message]
@@ -30,12 +33,16 @@ module Varify
         rule:    options[:rule]
       }
 
-      @callback.call(error) if @callback
+      if @callback
+        @callback.call(error)
+      else
+        raise ArgumentError, message
+      end
     end
 
     # Processes the input parameter
-    # @param param_key [Symbol] the key to identify the value out of the hash
-    # @param params [Hash] the hash of keys 
+    # @param [Symbol] Varify::Base.callback the key to identify the value out of the hash
+    # @param [Hash] params the hash of keys 
     def self.varify(param_key, params={}, options={},&block)
       value = params[param_key] || options[:default]
       name  = params[:name] || param_key.to_s.split('_').map{|e| e.capitalize}.join(' ')
