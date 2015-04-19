@@ -9,7 +9,8 @@ Gem::Specification.new do |s|
   s.email         = ['maciej@factor.io']
   s.homepage      = 'https://factor.io'
   s.summary       = 'Varify'
-  s.files         = ['lib/**/*.rb']
+  s.files         = Dir.glob('lib/**/*.rb')
+  s.license       = 'MIT'
   
   s.require_paths = ['lib']
 
