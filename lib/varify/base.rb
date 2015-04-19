@@ -43,6 +43,8 @@ module Varify
     # Processes the input parameter
     # @param [Symbol] Varify::Base.callback the key to identify the value out of the hash
     # @param [Hash] params the hash of keys 
+    # @param [Hash] options set of rules to test
+    # @param [Proc] &block optional block to use as a validator
     def self.varify(param_key, params={}, options={},&block)
       value = params[param_key] || options[:default]
       name  = params[:name] || param_key.to_s.split('_').map{|e| e.capitalize}.join(' ')
