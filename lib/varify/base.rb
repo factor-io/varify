@@ -1,10 +1,12 @@
 
 require 'varify/rules/required'
+require 'varify/rules/is_a'
 
 module Varify
   module Base
     RULES = {
-      required: Varify::Rules::RequiredRule
+      required: Varify::Rules::RequiredRule,
+      is_a:     Varify::Rules::IsARule
     }
 
 
