@@ -1,12 +1,14 @@
 
 require 'varify/rules/required'
 require 'varify/rules/is_a'
+require 'varify/rules/one_of'
 
 module Varify
   module Base
     RULES = {
       required: Varify::Rules::RequiredRule,
-      is_a:     Varify::Rules::IsARule
+      is_a:     Varify::Rules::IsARule,
+      one_of:   Varify::Rules::OneOfRule
     }
 
 
