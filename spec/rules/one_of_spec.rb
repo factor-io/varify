@@ -12,6 +12,11 @@ describe Varify::Rules::OneOfRule do
     expect(v.valid?).to eq(false)
   end
 
+  it 'raises an error of 0 options provided' do
+    v = Varify::Rules::OneOfRule.new(:key,'Key','foo',[])
+    expect(v.error_message).to eq("Key (:key) can't be valid because no valid options were provided")
+  end
+
   it 'can set error message with 1 options' do
     v = Varify::Rules::OneOfRule.new(:key,'Key','foo',['foo'])
     expect(v.error_message).to eq("Key (:key) must be 'foo'")
