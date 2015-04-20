@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    varify (0.0.2)
+    varify (0.0.3)
 
 GEM
   remote: https://rubygems.org/

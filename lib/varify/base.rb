@@ -2,13 +2,15 @@
 require 'varify/rules/required'
 require 'varify/rules/is_a'
 require 'varify/rules/one_of'
+require 'varify/rules/between'
 
 module Varify
   module Base
     RULES = {
       required: Varify::Rules::RequiredRule,
       is_a:     Varify::Rules::IsARule,
-      one_of:   Varify::Rules::OneOfRule
+      one_of:   Varify::Rules::OneOfRule,
+      between:  Varify::Rules::BetweenRule
     }
 
 
