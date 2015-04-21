@@ -52,22 +52,25 @@ module Varify
     # @param [Hash] options set of rules to test
     # @param [Proc] &block optional block to use as a validator
     def self.varify(param_key, params={}, options={},&block)
-      value = params[param_key] || options[:default]
-      name  = params[:name] || param_key.to_s.split('_').map{|e| e.capitalize}.join(' ')
-      rules = {}
+      value    = params[param_key] || options[:default]
+      name     = params[:name] || param_key.to_s.split('_').map{|e| e.capitalize}.join(' ')
+      required = options[:required]
+      rules    = {}
 
       rules_to_process = options.dup
       rules_to_process.delete(:default)
       rules_to_process.delete(:name)
 
-      rules_to_process.each do |rule_key,rule_value|
-        rule_class = RULES[rule_key]
-        raise "Rule ':#{rule_key}' is not defined" unless rule_class
-        rules[rule_key] = rule_class.new(param_key,name,value,rule_value)
-      end
+      if value || required
+        rules_to_process.each do |rule_key,rule_value|
+          rule_class = RULES[rule_key]
+          raise "Rule ':#{rule_key}' is not defined" unless rule_class
+          rules[rule_key] = rule_class.new(param_key,name,value,rule_value)
+        end
 
-      rules.each do |rule_key,rule|
-        fail(message: rule.error_message, key: param_key, rule:rule_key) unless rule.valid?
+        rules.each do |rule_key,rule|
+          fail(message: rule.error_message, key: param_key, rule:rule_key) unless rule.valid?
+        end
       end
 
       value

@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Varify::Base do
 
-  it 'can varify' do
+  it 'can extract the value' do
     foo = Varify::Base.varify(:foo,{foo:'bar'})
     expect(foo).to eq('bar')
   end
@@ -20,5 +20,10 @@ describe Varify::Base do
     Varify::Base.varify(:foo,{},{required:true})  
 
     expect(logs).to contain_exactly({message:"Foo (:foo) is required",key: :foo, rule: :required})
+  end
+
+  it 'can handle optional null values' do
+    value = Varify::Base.varify(:foo,{},{required:false})
+    expect(value).to be_nil
   end
 end
