@@ -4,7 +4,11 @@ module Varify
   module Rules
     class IsARule < Rule
       def valid?
-        @value.is_a?(@options)
+        if @options.is_a?(Array)
+          @values.all?{|i| i.is_a?(@options.first)}
+        else
+          @value.is_a?(@options)
+        end
       end
 
       def error_message
